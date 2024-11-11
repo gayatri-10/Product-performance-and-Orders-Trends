@@ -157,75 +157,75 @@ select first_name, last_name, salary
 from employees
 where salary > 60000;
 
--- Total Amount Spent by Each Customer (Bar Chart)
+-- Total Amount Spent by Each Customer
 select c.first_name, c.last_name, sum(o.total_amount) as total_spent
 from customers c
 join orders o on c.customer_id = o.customer_id
 group by c.customer_id
 order by total_spent desc;
 
--- Monthly Sales Revenue (Line Chart)
+-- Monthly Sales Revenue
 select to_char(order_date, 'YYYY-MM') as month, sum(total_amount) as total_revenue
 from orders
 group by to_char(order_date, 'YYYY-MM')
 order by month;
 
---  Number of Orders by Each Customer (Bar Chart)
+--  Number of Orders by Each Customer
 select c.first_name, c.last_name, count(o.order_id) as total_orders
 from customers c
 join orders o on c.customer_id = o.customer_id
 group by c.customer_id
 order by total_orders desc;
 
---  Top 5 Most Expensive Products (Bar Chart)
+--  Top 5 Most Expensive Products
 select name, price
 from products
 order by price desc limit 5;
 
--- Average Order Value (Single Metric / KPI)
+-- Average Order Value 
 select avg(total_amount) as avg_order_value
 from orders;
 
--- Sales Revenue per Month (Line Chart)
+-- Sales Revenue per Month
 select to_char(order_date, 'YYYY-MM') as month, sum(total_amount) as total_revenue
 from orders
 group by to_char(order_date, 'YYYY-MM')
 order by month;
 
--- Number of Orders Each Month (Line Chart)
+-- Number of Orders Each Month
 select to_char(order_date, 'YYYY-MM') as month, count(order_id) as total_orders
 from orders
 group by to_char(order_date, 'YYYY-MM')
 order by month;
 
--- Employee Salary Distribution (Histogram)
+-- Employee Salary Distribution
 select salary from employees;
 
--- Customer Distribution by Region (Pie Chart)
+-- Customer Distribution by Region
 select city, count(customer_id) as total_customers
 from customers
 group by city
 order by total_customers desc;
 
--- Employee Hiring Trends (Line Chart)
+-- Employee Hiring Trends
 select extract(year from hire_date) as hire_year, count(employee_id) as total_hired
 from employees
 group by hire_year
 order by hire_year;
 
--- Customer Count by City (Bar Chart)
+-- Customer Count by City
 select c.city, count(c.customer_id) as total_customers
 from customers c
 group by c.city
 order by total_customers desc;
 
--- Total Orders and Revenue by Year (Bar Chart or Line Chart)
+-- Total Orders and Revenue by Year
 select extract(year from o.order_date) as year, count(o.order_id) as total_orders, sum(o.total_amount) as total_revenue
 from orders o
 group by year
 order by year;
 
--- Most Common Product Categories (Pie Chart)
+-- Most Common Product Categories
 select p.category, count(p.product_id) as total_products
 from products p
 group by p.category
